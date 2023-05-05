@@ -18,27 +18,23 @@ public:
 
     // 高斯消元求解
     bool Solve() {
-        int rank = 0;
         for (int i = 0; i < n; i++) {
             int pivot = -1;
-            for (int j = rank; j < n; j++) { // 选主元
+            for (int j = i; j < n; j++) { // 选主元
                 if (fabs(a[j][i]) > 1e-8) {
                     pivot = j;
                     break;
                 }
             }
             if (pivot == -1) continue; // 主元为 0，跳过
-            if (pivot != rank) swap(a[pivot], a[rank]); // 将主元移至对角线上
-            for (int j = rank + 1; j < n; j++) { // 消元
-                double f = a[j][i] / a[rank][i];
+            if (pivot != i) swap(a[pivot], a[i]); // 将主元移至对角线上
+            for (int j = i + 1; j < n; j++) { // 消元
+                double f = a[j][i] / a[i][i];
                 for (int k = i; k <= n; k++) {
-                    a[j][k] -= f * a[rank][k];
+                    a[j][k] -= f * a[i][k];
                 }
             }
-            rank++;
         }
-
-        if (rank < n) throw runtime_error("矩阵无唯一解"); // 矩阵秩小于行数，抛出异常
 
         for (int i = n - 1; i >= 0; i--) { // 回代求解
             ans[i] = a[i][n];
