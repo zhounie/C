@@ -1,6 +1,7 @@
 #include <iostream>
 #include <iomanip>   // 控制小数点后位数
 #include <cmath>     // fabs函数
+#include <windows.h>
 using namespace std;
 
 const double EPSILON = 1e-8;   // 定义一个极小值
@@ -98,6 +99,7 @@ void input(Calculator& calc) {
 }
 
 int main() {
+    SetConsoleOutputCP(CP_UTF8);
     Calculator calc;
     while (true) {
         try {

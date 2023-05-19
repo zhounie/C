@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <windows.h>
 using namespace std;
 
 class GaussElimination {
@@ -63,17 +64,24 @@ private:
 };
 
 int main() {
-    int n;
-    printf("请输入线性方程组的未知数个数：");
-    scanf("%d", &n);
+    SetConsoleOutputCP(CP_UTF8);
+    while (true) {
+        int n;
+        printf("请输入线性方程组的未知数个数：");
+        scanf("%d", &n);
 
-    GaussElimination ge(n); // 创建高斯消元对象
-    try {
-        ge.Read(); // 读入矩阵
-        ge.Solve(); // 求解线性方程组
-        ge.Print(); // 输出解向量
-    } catch (exception& e) {
-        printf("运行时错误：%s\n", e.what()); // 捕获和处理异常
+        GaussElimination ge(n); // 创建高斯消元对象
+        try {
+            ge.Read(); // 读入矩阵
+            ge.Solve(); // 求解线性方程组
+            ge.Print(); // 输出解向量
+        } catch (exception& e) {
+            printf("运行时错误：%s\n", e.what()); // 捕获和处理异常
+        }
+        cout << "是否继续计算？(y/n)" << endl;
+        char choice;
+        cin >> choice;
+        if (choice != 'y' && choice != 'Y') break;
     }
     return 0;
 }
